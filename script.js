@@ -6,12 +6,7 @@ const popupCloseBtn = document.getElementById("close-popup");
 
 const searchTerm = document.getElementById("search-term");
 const searchBtn = document.getElementById("search");
-
-// Add history button
-const historyBtn = document.createElement("button");
-historyBtn.innerHTML = '<i class="fas fa-history"></i>';
-historyBtn.id = "history";
-document.querySelector("header").appendChild(historyBtn);
+const historyBtn = document.getElementById("history"); // Use the existing button
 
 // Your actual API keys
 const CAR_API_KEY = 'VRBTeSzQJDx7hT3lE5Qg4Q==uIeOY2azXzblJiUY';
@@ -208,6 +203,14 @@ function showSearchHistory() {
         historyEl.appendChild(termEl);
     });
 
+    const clearHistoryBtn = document.createElement("button");
+    clearHistoryBtn.textContent = "Clear History";
+    clearHistoryBtn.addEventListener("click", () => {
+        localStorage.removeItem("searchHistory");
+        historyEl.innerHTML = "<p>History cleared!</p>";
+    });
+
+    historyEl.appendChild(clearHistoryBtn);
     document.body.appendChild(historyEl);
 }
 
